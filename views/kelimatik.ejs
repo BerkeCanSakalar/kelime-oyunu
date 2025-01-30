@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelimatik</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Giriş Ekranı -->
+<div id="login-screen" class="screen">
+    <h1 class="game-title">Kelimatik</h1>
+    <p class="game-subtitle">Kelime bilginizi test edin ve en yüksek puanı elde edin! Ekibinizle oynamak istiyorsanız moderatör sayfasına göz atın.</p>
+    
+    <input type="text" id="nickname" placeholder="Nickname girin" class="input-field">
+    <button id="start-game" class="btn primary-btn">Oyuna Başla</button>
+    <div id="countdown" class="countdown" style="display: none;"></div>
+    
+    <p class="info-text">
+        Ekibinizle birlikte oynamak için bir kişi moderatör olarak ayarlanmalı. Moderatör sayfasında sorular ve cevaplar gözükür!
+    </p>
+    <a href="/moderator" target="_blank" class="moderator-link">Moderatör Sayfasına Git</a>
+    
+    <button id="show-scores-btn" class="btn secondary-btn">Skorları Göster</button>
+    <div id="score-section" style="display: none;">
+        <h2>Skor Tablosu</h2>
+        <table id="score-table" border="1" style="margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th>İsim</th>
+                    <th>Skor</th>
+                    <th>Süre (sn)</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Skorlar buraya eklenecek -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Oyun Bilgileri ve Kurallar -->
+    <div class="game-info">
+        <h3>Nasıl Oynanır?</h3>
+        <ul class="rules-list">
+            <li>Doğru harf açmak için <strong>-100 puan</strong> kaybedersiniz.</li>
+            <li>Her yanlış cevap, kelimenin toplam harf sayısının <strong>yarısı kadar</strong> puan kaybettirir.</li>
+            <li>Doğru bir cevap, kelime uzunluğuna bağlı olarak <strong>+100 puan</strong> kazandırır.</li>
+            <li>Bir soruda maksimum, kelimenin toplam harf uzunluğunun <strong>2/3'ü kadar harf</strong> açılabilir.</li>
+            <li>Pas geçmek, kalan hakkınızdan 1 azaltır ve yeni soruya geçmenizi sağlar.</li>
+            <li>Oyunu bitirerek skorunuzu kaydedebilirsiniz.</li>
+        </ul>
+    
+        <h3>Moderasyon Notu:</h3>
+        <ul class="moderation-notes">
+            <li>Ekibinizle oynamak için bir kişi <strong>moderatör olarak atanmalı</strong>.</li>
+            <li>Moderatör, oyun ekranını <strong>kendi bilgisayarında veya cihazında</strong> açmalıdır.</li>
+            <li>Başka bir cihazda moderasyon yapmaya izin verilmez.</li>
+            <li>Moderatör, soruları ve cevapları yalnızca kendi ekranında görebilir.</li>
+        </ul>
+    </div>
+</div>
+
+        <!-- Oyun Ekranı -->
+        <div id="game-screen" class="screen" style="display: none;">
+            <div id="word-info" style="font-size: 1.2rem; margin-bottom: 10px; color: #555;"></div>
+            <h2 id="question-text">Soru Metni Burada Görünecek</h2>
+            <div class="hexagon-container" id="hexagon-container"></div>
+            <div class="timers">
+                <div class="timer" id="main-timer">
+                    <strong>Ana Süre:</strong> <span id="time-left">180</span> sn
+                </div>
+                <div class="extra-timer" id="extra-timer" style="display: none;">
+                    <strong>Ekstra Süre:</strong> <span id="extra-time-left">20</span> sn
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="submit-answer" class="btn primary-btn">Cevabı Kontrol Et</button>
+                <button id="hint-button" class="btn secondary-btn">Harf Satın Al (-100 Puan)</button>
+                <button id="extra-time-button" class="btn danger-btn">Cevap Butonu</button>
+                <button id="pass-button" class="btn warning-btn">Pas Geç</button>
+                <button id="clear-hexagons" class="btn neutral-btn">Kutucukları Temizle</button>
+                <button id="end-game-button" class="btn danger-btn end-game">Oyunu Bitir</button>
+                <audio id="extra-time-sound" src="/sounds/tic-tac.mp3" preload="auto"></audio>
+                <audio id="correct-sound" src="/sounds/correct.mp3"></audio>
+                <audio id="wrong-sound" src="/sounds/wrong.mp3"></audio>
+                <audio id="pass-sound" src="/sounds/pass.mp3"></audio>
+                <audio id="word-sound" src="/sounds/eh.mp3"></audio>
+                <audio id="gameover-sound" src="/sounds/game-over.mp3"></audio>
+                <audio id="gamecountdown-sound" src="/sounds/game-countdown.mp3"></audio>
+            </div>
+            <p id="pass-count">Pas Hakları: 5</p>
+            <p id="score-display">Puan: <span id="score-value">0</span></p>
+            <p id="message" class="message message-popup" style="display: none;"></p>
+            <div id="countdown-message" class="message message-popup" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+
+</html>
